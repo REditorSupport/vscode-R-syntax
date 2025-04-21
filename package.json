@@ -1,0 +1,25 @@
+{
+  "name": "r",
+  "displayName": "R",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.99.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "r",
+      "aliases": ["R", "r"],
+      "extensions": [".r",".R"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "r",
+      "scopeName": "source.r",
+      "path": "./syntaxes/r.tmLanguage.json"
+    }]
+  }
+}
