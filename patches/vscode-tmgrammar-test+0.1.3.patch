@@ -1,0 +1,49 @@
+diff --git a/node_modules/vscode-tmgrammar-test/dist/common/index.js b/node_modules/vscode-tmgrammar-test/dist/common/index.js
+index 9fbfc81..61c92f1 100644
+--- a/node_modules/vscode-tmgrammar-test/dist/common/index.js
++++ b/node_modules/vscode-tmgrammar-test/dist/common/index.js
+@@ -74,7 +74,7 @@ function createRegistryFromGrammars(grammars) {
+                     fulfill(grammarIndex[scopeName]);
+                 });
+             }
+-            console.warn(`grammar not found for "${scopeName}"`);
++            // console.warn(`grammar not found for "${scopeName}"`);
+             return null;
+         },
+         getInjections: (scopeName) => {
+diff --git a/node_modules/vscode-tmgrammar-test/dist/unit/parsing.js b/node_modules/vscode-tmgrammar-test/dist/unit/parsing.js
+index 82aa71c..0d7e8a1 100644
+--- a/node_modules/vscode-tmgrammar-test/dist/unit/parsing.js
++++ b/node_modules/vscode-tmgrammar-test/dist/unit/parsing.js
+@@ -67,18 +67,20 @@ function parseHeader(as) {
+     if (as.length < 1) {
+         throw new Error(headerErrorMessage);
+     }
+-    let matchResult = headerRegex.exec(as[0]);
+-    if (matchResult === null) {
+-        throw new Error(headerErrorMessage);
+-    }
+-    else {
+-        let [, commentToken, scope, description = ''] = matchResult;
+-        return {
+-            commentToken: commentToken,
+-            scope: scope,
+-            description: description
+-        };
++    var matchResult = null;
++    for (let i = 0; i < as.length; i++) {
++        if (i > 5) break;
++        matchResult = headerRegex.exec(as[i]);
++        if (matchResult !== null) {
++            let [, commentToken, scope, description = ''] = matchResult;
++            return {
++                commentToken: commentToken,
++                scope: scope,
++                description: description
++            };
++        }
+     }
++    throw new Error(headerErrorMessage);
+ }
+ exports.parseHeader = parseHeader;
+ function parseGrammarTestCase(str) {

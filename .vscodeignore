@@ -2,3 +2,9 @@
 .vscode-test/**
 .gitignore
 vsc-extension-quickstart.md
+node_modules/**
+out/**
+scripts/**
+syntaxes/*.yaml
+*.vsix
+tests/**

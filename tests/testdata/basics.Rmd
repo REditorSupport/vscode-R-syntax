@@ -1,0 +1,74 @@
+---
+| SYNTAX TEST "text.html.markdown.rmarkdown" "basics"
+title: "Diamond sizes"
+date: 2016-08-25
+output: html_document
+---
+
+```{r setup, include = FALSE}
+|  ^ markup.fenced_code.block.markdown.rmarkdown fenced_code.block.language.markdown.rmarkdown
+|     ^^^^^ markup.fenced_code.block.markdown.rmarkdown meta.embedded.inline.r
+|            ^^^^^^^ variable.parameter.chunk-options.rmarkdown
+|
+library(ggplot2)
+library(dplyr)
+| ^^^^^ markup.fenced_code.block.markdown.rmarkdown meta.embedded.block.r meta.function-call.r support.function.r
+smaller <- diamonds %>%
+  filter(carat <= 2.5)
+```
+|^^ punctuation.definition.markdown.rmarkdown
+
+| <- -markup.fenced_code.block.markdown.rmarkdown
+
+We have data about `r nrow(diamonds)` diamonds. Only
+|                  ^ punctuation.definition.raw.markdown.rmarkdown
+|                   ^ markup.raw.inline.language.markdown.rmarkdown
+|                     ^^^^ support.function.r
+|                                   ^ punctuation.definition.raw.markdown.rmarkdown
+`r nrow(diamonds) - nrow(smaller)` are larger than
+| <- markup.raw.inline.markdown.rmarkdown punctuation.definition.raw.markdown.rmarkdown
+|  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ meta.embedded.inline.r
+|                                ^ punctuation.definition.raw.markdown.rmarkdown -meta.embedded.inline.r
+2.5 carats. The distribution of the remainder is shown
+below:
+
+| <- -meta.embedded.inline.r
+
+```{r, echo = FALSE}
+| <- markup.fenced_code.block.markdown.rmarkdown
+|^^ punctuation.definition.markdown.rmarkdown
+|   ^ fenced_code.block.language.markdown.rmarkdown
+|    ^ punctuation.separator.parameters.r
+|      ^^^^ variable.parameter.chunk-options.rmarkdown
+smaller %>%
+|       ^^^ keyword.operator.other.r
+  ggplot(aes(carat)) +
+|                    ^ keyword.operator.arithmetic.r
+  geom_freqpoly(binwidth = 0.01)
+```
+| <- punctuation.definition.markdown.rmarkdown
+
+
+```{r}
+# this is a broken block
+| <- markup.fenced_code.block.markdown.rmarkdown
+a = (
+```
+
+| <- -markup.fenced_code.block
+
+
+  ```{r}
+  # this is a intended block
+  | <- markup.fenced_code.block.markdown.rmarkdown
+  a = 1
+  ```
+
+| <- -markup.fenced_code.block
+
+
+# empty block
+```{r}
+```
+
+| <- -markup.fenced_code.block

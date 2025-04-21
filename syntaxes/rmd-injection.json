@@ -1,0 +1,33 @@
+{
+    "name": "R Markdown Injection",
+    "scopeName": "rmarkdown.injection",
+    "injectionSelector": "L:text.html.markdown.rmarkdown",
+    "patterns": [
+        {
+            "begin": "((`)([r|R])[ ]+)",
+            "beginCaptures": {
+                "1": {
+                    "name": "markup.raw.inline.markdown.rmarkdown"
+                },
+                "2": {
+                    "name": "punctuation.definition.raw.markdown.rmarkdown"
+                },
+                "3": {
+                    "name": "markup.raw.inline.language.markdown.rmarkdown"
+                }
+            },
+            "end": "(`)",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.definition.raw.markdown.rmarkdown"
+                }
+            },
+            "contentName": "meta.embedded.inline.r",
+            "patterns": [
+                {
+                    "include": "source.r"
+                }
+            ]
+        }
+    ]
+}
