@@ -7,6 +7,7 @@
   "type": "module",
   "license": "SEE LICENSE IN LICENSE",
   "publisher": "REditorSupport",
+  "icon": "images/Rlogo.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/REditorSupport/vscode-R-syntax"
