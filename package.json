@@ -2,7 +2,7 @@
   "name": "r-syntax",
   "displayName": "R Syntax",
   "description": "R Synxtax Highlight for Visual Studio Code",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "REditorSupport",
   "type": "module",
   "license": "SEE LICENSE IN LICENSE",
