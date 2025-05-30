@@ -152,3 +152,7 @@ foo::median
 my_vector |>
 #         ^^ keyword.operator.pipe.r
   foo()
+
+# issue #1
+foo(x = `#afd`)
+#        ^^^^ -comment
