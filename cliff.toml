@@ -33,7 +33,7 @@ body = """
             {% set_global issues = issues | unique %}\
             {% if issues | length > 0 %} (\
             {% for issue in issues %}\
-                [#{{ issue }}](https://github.com/randy3k/radian/issues/{{ issue }})\
+                [#{{ issue }}](https://github.com/REditorSupport/vscode-R-syntax/issues/{{ issue }})\
                 {% if not loop.last %}, {% endif %}\
             {%- endfor -%})\
             {%- endif %}\
@@ -41,7 +41,7 @@ body = """
 {% endfor %}\
 {% if version %}
     {% if previous.version %}
-      **Full Changelog**: https://github.com/randy3k/radian/compare/{{ previous.version }}...{{ version }}
+      **Full Changelog**: https://github.com/REditorSupport/vscode-R-syntax/compare/{{ previous.version }}...{{ version }}
     {% endif %}
 {% else -%}
   {% raw %}\n{% endraw %}
@@ -68,7 +68,7 @@ commit_parsers = [
     { body = ".*", group = "Other" },
 ]
 link_parsers = [
-    { pattern = "(?i)\\b(?:close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved) #(\\d+)", href = "https://github.com/randy3k/radian/issues/$1" },
+    { pattern = "(?i)\\b(?:close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved) #(\\d+)", href = "https://github.com/REditorSupport/vscode-R-syntax/issues/$1" },
 ]
 filter_commits = true
 topo_order = false

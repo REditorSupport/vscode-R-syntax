@@ -8,9 +8,9 @@
 
 ### Other
 
-* fix: capture backtick escaped variable ([#2](https://github.com/randy3k/radian/issues/2))
+* fix: capture backtick escaped variable ([#2](https://github.com/REditorSupport/vscode-R-syntax/issues/2))
 
-**Full Changelog**: https://github.com/randy3k/radian/compare/v0.1.1...v0.1.2
+**Full Changelog**: https://github.com/REditorSupport/vscode-R-syntax/compare/v0.1.1...v0.1.2
 
 ## 0.1.0 - 2025-05-13
 
