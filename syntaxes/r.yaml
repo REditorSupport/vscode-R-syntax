@@ -25,6 +25,7 @@ patterns:
   - include: "#lambda-functions"
   - include: "#builtin-functions"
   - include: "#function-calls"
+  - match: '{{var}}'
 
 repository:
   accessor:

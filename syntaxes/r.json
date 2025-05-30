@@ -40,6 +40,9 @@
     },
     {
       "include": "#function-calls"
+    },
+    {
+      "match": "(?:[a-zA-Z._][\\w.]*|`[^`]+`)"
     }
   ],
   "repository": {
