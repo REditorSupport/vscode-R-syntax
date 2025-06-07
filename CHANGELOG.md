@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.3 - 2025-06-07
+
+### Other
+
+* Expand supported VScode version range ([#4](https://github.com/REditorSupport/vscode-R-syntax/issues/4))
+
+**Full Changelog**: https://github.com/REditorSupport/vscode-R-syntax/compare/v0.1.2...v0.1.3
+
 ## 0.1.2 - 2025-05-30
 
 ### Bug Fixes
