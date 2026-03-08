@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.4 - 2026-03-08
+
+### Bug Fixes
+
+* fix: further expand vscode version range
+
+**Full Changelog**: https://github.com/REditorSupport/vscode-R-syntax/compare/v0.1.3...0.1.4
+
 ## 0.1.3 - 2025-06-07
 
 ### Other
