@@ -1,24 +1,42 @@
+name: Deploy Extension
+
 on:
   push:
     tags:
       - "*"
 
-name: Deploy Extension
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
       - run: npm ci
+      - name: Package extension
+        id: package
+        run: |
+          npx @vscode/vsce package
+          echo "vsix=$(ls *.vsix)" >> $GITHUB_OUTPUT
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ github.ref_name }} ${{ steps.package.outputs.vsix }} \
+            --title "${{ github.ref_name }}" \
+            --generate-notes
       - name: Publish to Open VSX Registry
         uses: HaaLeo/publish-vscode-extension@v2
         with:
           pat: ${{ secrets.OPEN_VSX_TOKEN }}
+          extensionFile: ${{ steps.package.outputs.vsix }}
       - name: Publish to Visual Studio Marketplace
         uses: HaaLeo/publish-vscode-extension@v2
         with:
           pat: ${{ secrets.VS_MARKETPLACE_TOKEN }}
           registryUrl: https://marketplace.visualstudio.com
+          extensionFile: ${{ steps.package.outputs.vsix }}
