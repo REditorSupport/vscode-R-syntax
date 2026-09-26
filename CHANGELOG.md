@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- Defer R file extensions and aliases to VS Code so the built-in default file extension is preserved (#11).
+
 ## 0.1.4 - 2026-03-08
 
 ### Bug Fixes
