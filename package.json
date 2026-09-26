@@ -34,8 +34,8 @@
       {
         "id": "rmd",
         "extensions": [
-          ".rmd",
-          ".Rmd"
+          ".Rmd",
+          ".rmd"
         ],
         "aliases": [
           "R Markdown",
