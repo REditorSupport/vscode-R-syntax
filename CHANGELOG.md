@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- Defer R file extensions and aliases to VS Code so the built-in `.R`
+  default is preserved, and use `.Rmd` as the default extension for
+  R Markdown files (#11).
+
 ## 0.1.4 - 2026-03-08
 
 ### Bug Fixes

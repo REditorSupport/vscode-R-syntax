@@ -28,26 +28,14 @@
     "languages": [
       {
         "id": "r",
-        "aliases": [
-          "R",
-          "r"
-        ],
-        "extensions": [
-          ".r",
-          ".R",
-          ".r",
-          ".rhistory",
-          ".rprofile",
-          ".rt"
-        ],
         "firstLine": "^#!/.*\\bRscript\\b",
         "configuration": "./language-configuration/r.json"
       },
       {
         "id": "rmd",
         "extensions": [
-          ".rmd",
-          ".Rmd"
+          ".Rmd",
+          ".rmd"
         ],
         "aliases": [
           "R Markdown",
