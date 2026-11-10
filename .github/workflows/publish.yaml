@@ -5,8 +5,12 @@ on:
     tags:
       - "*"
 
+permissions:
+  contents: read
+
 jobs:
-  deploy:
+  release:
+    name: Create GitHub Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -14,31 +18,69 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: "npm"
       - run: npm ci
       - name: Package extension
         id: package
         run: |
           npx @vscode/vsce package
-          echo "vsix=$(ls *.vsix)" >> $GITHUB_OUTPUT
+          echo "vsix=$(ls *.vsix)" >> "$GITHUB_OUTPUT"
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: r-syntax.vsix
+          path: ${{ steps.package.outputs.vsix }}
       - name: Create GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create ${{ github.ref_name }} ${{ steps.package.outputs.vsix }} \
-            --title "${{ github.ref_name }}" \
-            --generate-notes
-      - name: Publish to Open VSX Registry
-        uses: HaaLeo/publish-vscode-extension@v2
+          VSIX="${{ steps.package.outputs.vsix }}"
+          TAG="${{ github.ref_name }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$VSIX" --clobber
+          else
+            gh release create "$TAG" "$VSIX" \
+              --title "$TAG" \
+              --generate-notes
+          fi
+
+  publish-vs-marketplace:
+    name: Publish to Visual Studio Marketplace
+    needs: release
+    runs-on: ubuntu-latest
+    environment: vs-marketplace
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@v4
         with:
-          pat: ${{ secrets.OPEN_VSX_TOKEN }}
-          extensionFile: ${{ steps.package.outputs.vsix }}
-          skipDuplicate: true
+          node-version: 22
+      - name: Download VSIX artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: r-syntax.vsix
+          path: artifacts/
       - name: Publish to Visual Studio Marketplace
-        uses: HaaLeo/publish-vscode-extension@v2
+        run: npx --yes @vscode/vsce@4 publish --oidc --skip-duplicate --packagePath artifacts/*.vsix
+
+  publish-open-vsx:
+    name: Publish to Open VSX Registry
+    needs: release
+    runs-on: ubuntu-latest
+    environment: open-vsx
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@v4
         with:
-          pat: ${{ secrets.VSCE_TOKEN }}
-          registryUrl: https://marketplace.visualstudio.com
-          extensionFile: ${{ steps.package.outputs.vsix }}
-          skipDuplicate: true
+          node-version: 22
+      - name: Download VSIX artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: r-syntax.vsix
+          path: artifacts/
+      - name: Publish to Open VSX Registry
+        run: npx --yes ovsx@1 publish --trusted-publishing --skip-duplicate --packagePath artifacts/*.vsix
