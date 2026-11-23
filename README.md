@@ -7,6 +7,20 @@ Sublime Text [R syntax](https://github.com/sublimehq/Packages/tree/master/R).
 
 It only contains syntax definitions to allow users to switch to alternative formatters and language servers such as [air](https://github.com/posit-dev/air) and [ark](https://github.com/posit-dev/ark).
 
+## Glue interpolation
+
+R expressions inside quoted templates use the same highlighting as ordinary R code.
+
+```r
+glue::glue("My name is {name}.")
+stringr::str_glue("Total: {sum(values)}")
+records |> glue::glue_data("{name} scored {score}.")
+```
+
+The grammar recognizes `glue()`, `glue_data()`, `str_glue()`, and `str_glue_data()` by name, with or without their package qualifier. Single and double quotes work, and doubled braces such as `{{name}}` stay literal. Named arguments supply ordinary R values. For example, in `glue("{x}", x = "{name}")` only `x` in the first string is highlighted as R.
+
+Highlighting assumes glue's default braces and transformer. Aliases, custom delimiters, raw string templates, and expressions assembled across arguments are outside its scope. A locally defined function with one of the recognized names receives the same highlighting. In multiline data calls, put a named `.x` before the first template so the grammar can identify its role as you type.
+
 ## Installation
 
 The releases are available in VSCode Marketplace or Open VSX Registry. Search for extension "R Syntax".

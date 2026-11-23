@@ -15,6 +15,9 @@ library(dplyr)
 | ^^^^^ markup.fenced_code.block.markdown.rmarkdown meta.embedded.block.r meta.function-call.r support.function.r
 smaller <- diamonds %>%
   filter(carat <= 2.5)
+glue::glue("Total: {sum(x)}")
+|           ^^^^^^ string.quoted.double.r -meta.embedded.inline.glue.r
+|                   ^^^ meta.embedded.block.r meta.embedded.inline.glue.r support.function.r
 ```
 |^^ punctuation.definition.markdown.rmarkdown
 
